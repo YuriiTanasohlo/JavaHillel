@@ -6,10 +6,13 @@ public class Lesson {
 // home task "create facebook"
         Facebook facebook = new Facebook();
         facebook.createFacebook();
-// so I did that :)
 
 
-// home task "create calc"
+// home task "calculator"
+        SimpleCalc simpleCalc = new SimpleCalc();
+        simpleCalc.run();
+
+// more complicated version of calculator
 /*
 v0.1
 
