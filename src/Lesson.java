@@ -1,3 +1,5 @@
+import Calc.Calc;
+
 public class Lesson {
     public static void main(String[] args) {
 // just first action
@@ -14,7 +16,7 @@ public class Lesson {
 
 // more complicated version of calculator
 /*
-v0.1
+v0.1.1
 
 testing done:
 - smoke testing
