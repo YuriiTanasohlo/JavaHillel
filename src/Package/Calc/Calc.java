@@ -1,4 +1,4 @@
-package Calc;
+package Package.Calc;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package Calc;
+package Package.Calc;
 
 public class Config {
 // turn on to see logs

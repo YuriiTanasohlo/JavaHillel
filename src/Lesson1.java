@@ -1,7 +1,9 @@
-import Calc.Calc;
+import Package.Calc.Calc;
+import Package.Facebook;
+import Package.SimpleCalc;
 
-public class Lesson {
-    public static void main(String[] args) {
+public class Lesson1 {
+    public void run() {
 // just first action
         System.out.println("Hello\n");
 
