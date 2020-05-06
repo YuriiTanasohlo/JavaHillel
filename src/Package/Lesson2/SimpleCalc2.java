@@ -1,4 +1,4 @@
-package Package;
+package Package.Lesson2;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -75,6 +75,7 @@ public class SimpleCalc2 {
                 System.out.println("Enter correct example");
             }
         }
+        System.out.println("\n");
     }
 }
 

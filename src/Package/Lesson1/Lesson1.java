@@ -1,6 +1,7 @@
+package Package.Lesson1;
+
 import Package.Calc.Calc;
-import Package.Facebook;
-import Package.SimpleCalc;
+
 
 public class Lesson1 {
     public void run() {

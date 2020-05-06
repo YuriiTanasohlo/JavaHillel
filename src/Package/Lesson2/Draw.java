@@ -1,4 +1,4 @@
-package Package;
+package Package.Lesson2;
 
 import java.util.Scanner;
 
@@ -30,6 +30,7 @@ public class Draw {
             }
             System.out.println(line);
         }
+        System.out.println("\n");
     }
 
     public void envelope() {
@@ -56,6 +57,7 @@ public class Draw {
             }
             System.out.println(line);
         }
+        System.out.println("\n");
     }
 
     public void chess() {
@@ -89,5 +91,6 @@ public class Draw {
             }
             System.out.println(line);
         }
+        System.out.println("\n");
     }
 }

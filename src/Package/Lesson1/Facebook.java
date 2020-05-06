@@ -1,4 +1,4 @@
-package Package;
+package Package.Lesson1;
 
 public class Facebook {
     public void createFacebook()  {
