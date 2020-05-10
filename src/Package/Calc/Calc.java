@@ -1,8 +1,7 @@
 package Package.Calc;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,98 +26,138 @@ public class Calc {
             } else {
 
 //  clean the example string from wrong chars
-                Pattern p = Pattern.compile("\\d+\\.\\d+|\\d+|\\*|\\/|\\+|\\-");
-                Matcher m = p.matcher(exampleString);
-                String cleanedExample = "";
-                while (m.find()) {
-                    cleanedExample += m.group();
-                }
+
+                String cleanedExample = formatExpression(exampleString);
                 print.printLog("Cleaned example : " + cleanedExample);
+                String rpn = expressionToRPN(cleanedExample);
+                print.printLog("RPN : " + rpn);
 
-// creating objects of operators and operands
-                List<String> operators = new <String>LinkedList();
-                List<Double> operands = new <Double>LinkedList();
+                print.printResult(PRNtoAnswer(rpn));
 
-//parsing operators
-                p = Pattern.compile("\\*|\\/|\\+|\\-");
-                m = p.matcher(cleanedExample);
-                while (m.find()) {
-                    operators.add(m.group());
-                }
-
-//parsing operands
-                p = Pattern.compile("\\d+\\.\\d+|\\d+");
-                m = p.matcher(cleanedExample);
-
-                while (m.find()) {
-                    operands.add(Double.parseDouble(m.group()));
-                }
-
-                print.printLog("Operators count : " + operators.size());
-                print.printLog("Operands count: " + operands.size());
-
-
-//check if the parsed data is valid
-                if (operators.size() < 1 || operators.size() + 1 != operands.size()) {
-//
-                    print.printNullException();
-                } else {
-
-//calculation
-                    while (operators.size() > 0) {
-                        print.printLog("Main iteration");
-                        int a = 0;
-                        while (a < operators.size()) {
-                            print.printLog("Second lay iteration");
-                            print.printLog("Operators : " + operators);
-                            print.printLog("Operands : " + operands);
-                            print.printLog("A : " + a);
-                            print.printLog("Operators count : " + operators.size());
-
-                            if (operators.get(a).equals("*")) {
-                                operands.set(a, operands.get(a) * operands.get(a + 1));
-                                operands.remove(a + 1);
-                                operators.remove(a);
-                            } else if (operators.get(a).equals("/")) {
-                                operands.set(a, operands.get(a) / operands.get(a + 1));
-                                operands.remove(a + 1);
-                                operators.remove(a);
-                            } else if (a + 1 < operators.size()) {
-                                if (operators.get(a).equals("+") && !(operators.get(a + 1).equals("*") || operators.get(a + 1).equals("/"))) {
-                                    print.printLog("Central calc block is working " + operators.get(a + 1).equals("*") + " " + operators.get(a + 1).equals("/"));
-                                    operands.set(a, operands.get(a) + operands.get(a + 1));
-                                    operands.remove(a + 1);
-                                    operators.remove(a);
-
-                                } else if (operators.get(a).equals("-") && !(operators.get(a + 1).equals("*") || operators.get(a + 1).equals("/"))) {
-                                    print.printLog("Central calc block is working " + operators.get(a + 1).equals("*") + " " + operators.get(a + 1).equals("/"));
-                                    operands.set(a, operands.get(a) - operands.get(a + 1));
-                                    operands.remove(a + 1);
-                                    operators.remove(a);
-                                } else {
-                                    a++;
-                                }
-                            } else {
-                                if (operators.get(a).equals("+")) {
-                                    operands.set(a, operands.get(a) + operands.get(a + 1));
-                                    operands.remove(a + 1);
-                                    operators.remove(a);
-                                } else if (operators.get(a).equals("-")) {
-                                    operands.set(a, operands.get(a) - operands.get(a + 1));
-                                    operands.remove(a + 1);
-                                    operators.remove(a);
-                                } else {
-                                    a++;
-                                }
-
-
-                            }
-                        }
-                    }
-//result
-                    print.printResult(operands.get(0));
-                }
             }
         }
+    }
+
+    private static String formatExpression(String expression){
+//        (^-)?\\d+\\.?\\d* -  negative number on the beginning of the string, or just numbers on any position of the string (numbers can be floating point number)
+//        |\\(\\-\\d+\\.?\\d* - or negative numbers after opened bracket
+//        |\\*|\\/|\\+|\\-|\\(|\\)|\\^ - or different operands
+        Pattern p = Pattern.compile("(^-)?\\d+\\.?\\d*|\\(\\-\\d+\\.?\\d*|\\*|\\/|\\+|\\-|\\(|\\)|\\^");
+        Matcher m = p.matcher(expression);
+        String formattedExpression = "";
+        while (m.find()) {
+            if(m.group().length() > 1){
+//                to add zero to negative operands like: -5-(-5) -> 0-5-(0-5)
+                if(m.group().charAt(0) == '-'){
+                    formattedExpression += ('0' + m.group());
+                } else if(m.group().charAt(0) == '(' && m.group().charAt(1) == '-'){
+                    formattedExpression += ("(0" + m.group().substring(1));
+                }
+            }
+             else {
+                formattedExpression += m.group();
+            }
+        }
+
+
+        return formattedExpression;
+    }
+
+    private static double PRNtoAnswer(String RPN) {
+        String operand = "";
+        Stack<Double> stack = new Stack<>();
+
+        int RPNLength = RPN.length();
+
+        for (int i = 0; i < RPNLength; i++) {
+            if (RPN.charAt(i) == ' ') {
+                continue;
+            } else if (getPriority(RPN.charAt(i)) == 0) {
+                while (RPN.charAt(i) != ' ' && getPriority(RPN.charAt(i)) == 0) {
+                    operand += RPN.charAt(i++);
+                    if (i == RPNLength) {
+                        break;
+                    }
+                }
+                stack.push(Double.parseDouble(operand));
+                operand = "";
+            }
+
+            if (getPriority(RPN.charAt(i)) > 1) {
+                double a = stack.pop();
+                double b = stack.pop();
+
+                switch (RPN.charAt(i)) {
+                    case '+':
+                        stack.push(b + a);
+                        break;
+                    case '-':
+                        stack.push(b - a);
+                        break;
+                    case '*':
+                        stack.push(b * a);
+                        break;
+                    case '/':
+                        stack.push(b / a);
+                        break;
+                    case '^':
+                        stack.push(Math.pow(b, a));
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+        return stack.pop();
+    }
+
+    private static String expressionToRPN(String expression) {
+        String current = "";
+        Stack<Character> stack = new Stack<>();
+        int priority;
+        int expressionLength = expression.length();
+
+        for (int i = 0; i < expressionLength; i++) {
+            priority = getPriority(expression.charAt(i));
+
+            if (priority == 0) {
+                current += expression.charAt(i);
+            } else if (priority == 1) {
+                stack.push(expression.charAt(i));
+            } else if (priority > 1) {
+                current += " ";
+                while (!stack.empty()) {
+                    if (getPriority(stack.peek()) >= priority) {
+                        current += stack.pop();
+                    } else {
+                        break;
+                    }
+                }
+                stack.push(expression.charAt(i));
+
+            } else if (priority == -1) {
+                current += " ";
+                while (getPriority(stack.peek()) != 1) {
+                    current += stack.pop();
+                }
+                stack.pop();
+            }
+        }
+        while (!stack.empty()) {
+            current += stack.pop();
+        }
+        return current;
+    }
+
+    private static int getPriority(char token) {
+        return switch (token) {
+            case '^' -> 4;
+            case '*', '/' -> 3;
+            case '+', '-' -> 2;
+            case '(' -> 1;
+            case ')' -> -1;
+            default -> 0;
+        };
     }
 }
