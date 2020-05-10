@@ -4,8 +4,17 @@ import java.util.Arrays;
 
 public class Lesson3 {
     public void run(){
+        Calculation calculation = new Calculation();
+        System.out.println(calculation.digitSum(10001130));
+        calculation.pointAffiliationDefiner();
+
+        studentsTest();
+    }
+    public void studentsTest(){
+
+        // testing
         Students students = new Students();
-// testing
+
         Object[] myClassGroup = students.defaultInitiateClassGroup();
         myClassGroup = students.addNewStudent("Georg", myClassGroup);
 
@@ -24,6 +33,5 @@ public class Lesson3 {
         myClassGroup1 = students.addNewStudent("Georg", myClassGroup1);
         myClassGroup1 = students.addMark("Georg", 5, myClassGroup1);
         students.printClassGroup(myClassGroup1);
-
     }
 }
