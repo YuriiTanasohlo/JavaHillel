@@ -2,11 +2,12 @@ import Package.Calc.Calc;
 import Package.Lesson1.Lesson1;
 import Package.Lesson2.Lesson2;
 import Package.Lesson3.Lesson3;
+import Package.Lesson4.Lesson4;
 
 public class Main {
     public static void main(String[] args) {
-        Calc calc = new Calc();
-        calc.runCalc();
+//        Calc calc = new Calc();
+//        calc.runCalc();
 
 
 
@@ -16,5 +17,7 @@ public class Main {
 //        lesson2.run();
 //        Lesson3 lesson3 = new Lesson3();
 //        lesson3.run();
+        Lesson4 lesson4 = new Lesson4();
+        lesson4.run();
     }
 }
