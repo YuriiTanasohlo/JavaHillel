@@ -12,7 +12,7 @@ public class Lesson4 {
         students = actions.deleteStudent(students, 2);
         students = actions.addStudent(students, "Peter", "Petrov");
         students = actions.addStudent(students, "Petar", "Petrov");
-        students = actions.deleteStudent(students, actions.contains(students, "Peter", "Petrov"));
+        students = actions.deleteStudent(students, "Petrov");
         actions.printInformation(students);
 
         actions.printInformation(students, actions.contains(students, "Ivanov"));

@@ -78,8 +78,16 @@ public class Actions {
     }
 
     public Student[] deleteStudent(Student[] students, String lastName) {
-        Student[] studentsCopy = new Student[students.length - 1];
-        return deleteStudent(studentsCopy, contains(studentsCopy, lastName));
+        Student[] studentsCopy = new Student[students.length];
+        System.arraycopy(students, 0, studentsCopy, 0, students.length);
+
+        int studentToDeleteId = contains(studentsCopy, lastName);
+        while(studentToDeleteId != -1){
+            studentsCopy = deleteStudent(studentsCopy, studentToDeleteId);
+            studentToDeleteId = contains(studentsCopy, lastName);
+        }
+
+        return studentsCopy;
     }
 
     public Student[] deleteStudent(Student[] students, int id) {
