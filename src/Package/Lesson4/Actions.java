@@ -4,9 +4,8 @@ import java.util.Arrays;
 
 public class Actions {
 
-    final String charString = "abcdefghijklmnopqrstuvwxyz";
-
     public String randomIdentifier() {
+        String charString = "abcdefghijklmnopqrstuvwxyz";
         int lexiconLength = charString.length();
         int maxNameLength = 10;
         int minNameLength = 5;
@@ -92,7 +91,6 @@ public class Actions {
 
     public Student[] deleteStudent(Student[] students, int id) {
         Student[] studentsCopy = new Student[students.length - 1];
-//        printInformation(studentsCopy);
         for (int i = 0, j = 0; i < students.length; i++) {
             if (students[i].id == id) {
                 continue;
