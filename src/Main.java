@@ -1,8 +1,4 @@
-import Package.Calc.Calc;
-import Package.Lesson1.Lesson1;
-import Package.Lesson2.Lesson2;
-import Package.Lesson3.Lesson3;
-import Package.Lesson4.Lesson4;
+import Package.Lesson5.Lesson5;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,7 +13,9 @@ public class Main {
 //        lesson2.run();
 //        Lesson3 lesson3 = new Lesson3();
 //        lesson3.run();
-        Lesson4 lesson4 = new Lesson4();
-        lesson4.run();
+//        Lesson4 lesson4 = new Lesson4();
+//        lesson4.run();
+        Lesson5 lesson5 = new Lesson5();
+        lesson5.run();
     }
 }
