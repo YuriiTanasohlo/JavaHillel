@@ -56,10 +56,14 @@ public class Lesson5 {
         container2.print();
         container3.print();
         System.out.println("isEqual: " + container2.isEqual(container3));
-
-//        check clean
+//
+////        check clean
         container3.clean();
         container3.print();
+
+//        check sort
+        container.sort();
+        container.print();
     }
 
 
