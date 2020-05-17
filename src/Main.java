@@ -16,6 +16,7 @@ public class Main {
 //        Lesson4 lesson4 = new Lesson4();
 //        lesson4.run();
         Lesson5 lesson5 = new Lesson5();
-        lesson5.run();
+        lesson5.runContainer();
+        lesson5.runStudents();
     }
 }

@@ -1,9 +1,11 @@
 package Package.Lesson5;
 
+import Package.Lesson5.Students.StudentGroup;
+
 import java.util.Arrays;
 
 public class Lesson5 {
-    public void run(){
+    public void runContainer(){
 //        initiating test data
         int[] myArray = {4,5,7};
         int[] myArray1 = {11,12,14};
@@ -56,14 +58,45 @@ public class Lesson5 {
         container2.print();
         container3.print();
         System.out.println("isEqual: " + container2.isEqual(container3));
-//
-////        check clean
+
+//        check clean
         container3.clean();
         container3.print();
 
 //        check sort
         container.sort();
         container.print();
+    }
+
+    public void runStudents(){
+        StudentGroup studentGroup = new StudentGroup();
+
+        studentGroup.setRandomStudents(2);
+        studentGroup.addStudent("Peter", "Petrov");
+        studentGroup.addStudent("Ivan", "Ivanov", 6);
+
+        studentGroup.setMark("Ivan", "Ivanov", 4, 4);
+        studentGroup.setMark(3, 4, 4);
+
+        studentGroup.setAttendance("Ivan", "Ivanov", 4);
+        studentGroup.setAttendance("Peter", "Petrov", 1);
+
+        studentGroup.printGroup();
+        studentGroup.deleteStudent("Peter", "Petrov");
+        studentGroup.printGroup();
+
+        studentGroup.addStudent("Peter", "Petrov");
+        System.out.println("hasStudent Peter Petrov? " + studentGroup.hasStudent("Peter", "Petrov"));
+
+        studentGroup.clearGroup();
+        studentGroup.printGroup();
+
+        studentGroup.setRandomStudents(9);
+        studentGroup.addStudent("Petea", "Petrov");
+        studentGroup.addStudent("Peter", "Petrof");
+        studentGroup.printGroup();
+        studentGroup.sortGroup();
+        studentGroup.printGroup();
     }
 
 
