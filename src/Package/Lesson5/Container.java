@@ -5,15 +5,11 @@ public class Container {
     private int[] container;
 
     public Container() {
+        this(new int[0]);
     }
 
     public Container(int[] container) {
         this.container = this.arrayCopy(container);
-    }
-
-    public enum type {
-        ASC,
-        DESC
     }
 
     public int[] getContainer() {

@@ -14,6 +14,7 @@ public class Lesson5 {
         Container container1 = new Container(myArray1);
 
 //        check setContainer
+        container.print();
         container.setContainer(myArray);
         container.print();
         container1.setContainer(myArray2);
