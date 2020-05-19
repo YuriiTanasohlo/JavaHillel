@@ -1,4 +1,4 @@
-import Package.Lesson5.Lesson5;
+import Package.Lesson6.Lesson6;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,8 +15,10 @@ public class Main {
 //        lesson3.run();
 //        Lesson4 lesson4 = new Lesson4();
 //        lesson4.run();
-        Lesson5 lesson5 = new Lesson5();
-        lesson5.runContainer();
-        lesson5.runStudents();
+//        Lesson5 lesson5 = new Lesson5();
+//        lesson5.runContainer();
+//        lesson5.runStudents();
+        Lesson6 lesson6 = new Lesson6();
+        lesson6.run();
     }
 }
