@@ -1,4 +1,4 @@
-import Package.Lesson7.Lesson7;
+import Package.Lesson8.Lesson8;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,7 +20,8 @@ public class Main {
 //        lesson5.runStudents();
 //        Lesson6 lesson6 = new Lesson6();
 //        lesson6.run();
-        Lesson7 lesson7 = new Lesson7();
-        lesson7.run();
+//        Lesson7 lesson7 = new Lesson7();
+//        lesson7.run();
+        Lesson8.run();
     }
 }
