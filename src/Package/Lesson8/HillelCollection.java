@@ -88,15 +88,13 @@ public class HillelCollection implements Collection {
 
     @Override
     public boolean addAll(Collection collection) {
-        if (((HillelCollection) collection).size == 0) {
+        if (collection.size() == 0) {
             return false;
         }
         if (collection.size() > this.collection.length - size) {
             increaseCollection(collection.size());
         }
-        for (int i = size; i < size + collection.size(); i++) {
-            this.collection[i] = ((HillelCollection) collection).getElement(i - size);
-        }
+        System.arraycopy(collection.toArray(), 0,this.collection , size, collection.size());
         size += collection.size();
         return true;
     }
@@ -106,11 +104,11 @@ public class HillelCollection implements Collection {
         if (collection.size() == 0) return false;
         boolean success = false;
         for (int i = 0; i < collection.size(); i++) {
-            int index = find(((HillelCollection) collection).getElement(i));
+            int index = find(collection.toArray()[i]);
             while (index != -1) {
                 remove(index);
                 success = true;
-                index = find(((HillelCollection) collection).getElement(i));
+                index = find(collection.toArray()[i]);
             }
         }
         clean();
@@ -124,8 +122,8 @@ public class HillelCollection implements Collection {
         Object[] collectionCopy = new Object[collection.size()];
 
         for (int i = 0; i < collection.size(); i++) {
-            if (find(((HillelCollection) collection).getElement(i)) != -1) {
-                collectionCopy[j] = ((HillelCollection) collection).getElement(i);
+            if (find(collection.toArray()[i]) != -1) {
+                collectionCopy[j] = collection.toArray()[i];
                 j++;
             }
         }

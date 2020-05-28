@@ -23,4 +23,9 @@ public class ExampleObject {
 
         return Objects.equals(myString, that.myString);
     }
+
+    @Override
+    public String toString() {
+        return myString;
+    }
 }
