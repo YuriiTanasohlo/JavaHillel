@@ -1,10 +1,11 @@
-import Package.Lesson9.Lesson9;
+import Package.Lesson10.Lesson10;
 
 public class Main {
     public static void main(String[] args) {
 //        Calc calc = new Calc();
 //        calc.runCalc();
 
+//        Action.run();
 
 
 //        Lesson1 lesson1 = new Lesson1();
@@ -23,6 +24,7 @@ public class Main {
 //        Lesson7 lesson7 = new Lesson7();
 //        lesson7.run();
 //        Lesson8.run();
-        Lesson9.run();
+//        Lesson9.run();
+        Lesson10.run();
     }
 }
