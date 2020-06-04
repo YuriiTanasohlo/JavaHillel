@@ -78,7 +78,7 @@ public class HillelCollection implements Collection {
     public boolean containsAll(Collection collection) {
         if (collection.size() == 0) return false;
         for (int i = 0; i < collection.size(); i++) {
-            int index = find(((HillelCollection) collection).getElement(i));
+            int index = find(collection.toArray()[i]);
             if (index == -1) {
                 return false;
             }
