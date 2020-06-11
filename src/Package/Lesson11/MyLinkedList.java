@@ -8,7 +8,6 @@ public class MyLinkedList implements List {
     private int size;
     private Node first;
     private Node last;
-    private Node nextNode;
 
     public MyLinkedList() {
         this.size = 0;
@@ -67,7 +66,7 @@ public class MyLinkedList implements List {
     @Override
     public boolean add(Object object) {
         if (size == 0) {
-            first = last = nextNode = new Node(object, null, null);
+            first = last = new Node(object, null, null);
         } else {
             last.next = new Node(object, null, last);
             last = last.next;
@@ -91,16 +90,36 @@ public class MyLinkedList implements List {
 
     @Override
     public boolean containsAll(Collection collection) {
-        return collection.containsAll(this);
+        if (collection.size() == 0) return false;
+        for (Object element : collection.toArray()) {
+            if (!contains(element)) return false;
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(Collection collection) {
-        return false;
+        if (collection.size() == 0) return false;
+        for (Object element : collection.toArray()) {
+            add(element);
+        }
+        return true;
     }
 
     @Override
-    public boolean addAll(int index, Collection c) {
+    public boolean addAll(int index, Collection collection) {
+        if (collection.size() == 0) return false;
+
+        ListIterator listIterator = listIterator();
+        while (listIterator.hasNext()) {
+            if (listIterator.nextIndex() == index) {
+                for (Object element : collection.toArray()) {
+                    listIterator.add(element);
+                }
+                return true;
+            }
+            listIterator.next();
+        }
         return false;
     }
 
@@ -113,32 +132,83 @@ public class MyLinkedList implements List {
 
     @Override
     public Object get(int index) {
-        return null;
+        ListIterator listIterator = listIterator();
+        while (listIterator.hasNext()) {
+            if (listIterator.nextIndex() == index) {
+                return listIterator.next();
+            }
+            listIterator.next();
+        }
+        return false;
     }
 
     @Override
     public Object set(int index, Object element) {
-        return null;
+        ListIterator listIterator = listIterator();
+        while (listIterator.hasNext()) {
+            if (listIterator.nextIndex() == index) {
+                Object objectToReturn = listIterator.next();
+                listIterator.previous();
+                listIterator.set(element);
+                return objectToReturn;
+            }
+            listIterator.next();
+        }
+        return false;
     }
 
     @Override
     public void add(int index, Object element) {
-
+        ListIterator listIterator = listIterator();
+        while (listIterator.hasNext()) {
+            if (listIterator.nextIndex() == index) {
+                listIterator.add(element);
+                return;
+            }
+            listIterator.next();
+        }
     }
 
     @Override
     public Object remove(int index) {
+        ListIterator listIterator = listIterator();
+        while (listIterator.hasNext()) {
+            if (listIterator.nextIndex() == index) {
+                Object objectToReturn = listIterator.next();
+                listIterator.remove();
+                return objectToReturn;
+            }
+            listIterator.next();
+        }
         return null;
     }
 
     @Override
-    public int indexOf(Object o) {
-        return 0;
+    public int indexOf(Object object) {
+        ListIterator listIterator = listIterator();
+        int currentIndex;
+        while (listIterator.hasNext()) {
+            currentIndex = listIterator.nextIndex();
+            Object currentObject = listIterator.next();
+            if (currentObject.equals(object)) {
+                return currentIndex;
+            }
+        }
+        return -1;
     }
 
     @Override
-    public int lastIndexOf(Object o) {
-        return 0;
+    public int lastIndexOf(Object object) {
+        ListIterator listIterator = listIterator();
+        int currentIndex;
+        int indexOf = -1;
+        while (listIterator.hasNext()) {
+            currentIndex = listIterator.nextIndex();
+            if (listIterator.next().equals(object)) {
+                indexOf = currentIndex;
+            }
+        }
+        return indexOf;
     }
 
     @Override
@@ -168,7 +238,11 @@ public class MyLinkedList implements List {
 
             @Override
             public Object previous() {
-                nextNode = nextNode.previous;
+                if(nextIndex() == size){
+                    nextNode = last;
+                } else {
+                    nextNode = nextNode.previous;
+                }
                 index--;
                 return nextNode.data;
             }
@@ -240,13 +314,31 @@ public class MyLinkedList implements List {
     }
 
     @Override
-    public boolean retainAll(Collection c) {
-        return false;
+    public boolean retainAll(Collection collection) {
+        ListIterator listIterator = listIterator();
+        MyLinkedList myLinkedList = new MyLinkedList();
+        while (listIterator.hasNext()) {
+            Object currentElement = listIterator.next();
+            for (Object element : collection.toArray()) {
+                if (currentElement.equals(element)) myLinkedList.add(element);
+            }
+        }
+        size = myLinkedList.size;
+        first = myLinkedList.first;
+        last = myLinkedList.last;
+
+        return true;
     }
 
     @Override
-    public boolean removeAll(Collection c) {
-        return false;
+    public boolean removeAll(Collection collection) {
+        if (collection.size() == 0) return false;
+
+        boolean isRemovedAll = true;
+        for (Object element : collection.toArray()) {
+            if (!remove(element)) isRemovedAll = false;
+        }
+        return isRemovedAll;
     }
 
     @Override
@@ -283,6 +375,4 @@ public class MyLinkedList implements List {
             this.previous = previous;
         }
     }
-
-
 }
