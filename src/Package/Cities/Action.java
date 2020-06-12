@@ -2,11 +2,20 @@ package Package.Cities;
 
 public class Action {
     public static void run(){
-        Features.position(2, 76, 12, 203);
+        Features.position(0, 0, 200, 200);
 
         Cities cities = new Cities();
         setRandomCities(10, cities);
         Cities cities1 = Features.getVisibleCities(cities);
+
+        System.out.println();
+        System.out.println("Print all cities:");
+        Features.printCities(cities);
+        Features.printMap(cities);
+        System.out.println();
+        System.out.println("Print all visible cities:");
+        Features.printCities(cities1);
+        Features.printMap(cities1);
         System.out.println();
     }
 
