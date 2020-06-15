@@ -27,7 +27,7 @@ public class MyArrayList implements List {
 
     @Override
     public boolean contains(Object object) {
-        return find(object) == -1;
+        return find(object) != -1;
     }
 
     @Override

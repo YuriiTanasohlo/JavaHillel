@@ -25,8 +25,8 @@ public final class Lesson12 {
         endBlockTest();
 
         startBlockTest("contains(Object object)");
-        System.out.println("contains() " + myArrayList.contains(3));
-        System.out.println("contains() " + myArrayList.contains(6));
+        System.out.println("contains() " + myArrayList.contains(30));
+        System.out.println("contains() " + myArrayList.contains(60));
         endBlockTest();
 
         startBlockTest("Iterator()");
