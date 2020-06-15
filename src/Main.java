@@ -1,4 +1,4 @@
-import Package.Lessons12.Lesson12;
+import Package.Lesson12.Lesson12;
 
 public class Main {
     public static void main(String[] args) {
