@@ -27,6 +27,9 @@ public class MyTreeSet implements Set {
 
     @Override
     public boolean contains(Object object) {
+        if(size == 0) {
+            return false;
+        }
         return find(object, root) != null;
     }
 
@@ -88,13 +91,17 @@ public class MyTreeSet implements Set {
     @Override
     public boolean add(Object object) {
         Node newNode = new Node(object);
+        boolean isAdded;
         if (root == null) {
             root = newNode;
+            isAdded = true;
         } else {
-            add(object, root);
+            isAdded = add(object, root);
         }
-        size++;
-        return true;
+        if(isAdded) {
+            size++;
+        }
+        return isAdded;
     }
 
     @Override
@@ -121,8 +128,14 @@ public class MyTreeSet implements Set {
             if (node.left == null && node.right == null) {
                 return null;
             } else if (node.left == null) {
+                if(node.equals(root)){
+                    root = node.right;
+                }
                 return node.right;
             } else if (node.right == null) {
+                if(node.equals(root)){
+                    root = node.left;
+                }
                 return node.left;
             } else {
                 Node firstRightNode = getFirst(node.right);
@@ -203,21 +216,23 @@ public class MyTreeSet implements Set {
         return Arrays.toString(toArray());
     }
 
-    private void add(Object object, Node node) {
+    private boolean add(Object object, Node node) {
         int compared = comparator.compare(node.data, object);
         if (compared == 0) {
-            return;
+            return false;
         } else if (compared > 0) {
             if (node.left == null) {
                 node.left = new Node(object);
+                return true;
             } else {
-                add(object, node.left);
+                return add(object, node.left);
             }
         } else {
             if (node.right == null) {
                 node.right = new Node(object);
+                return true;
             } else {
-                add(object, node.right);
+                return add(object, node.right);
             }
         }
     }
