@@ -14,7 +14,11 @@ public class MyTreeSet implements Set {
         this.comparator = new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
-                return ((Comparable) o1).compareTo(o2);
+                if (o1 instanceof Comparable) {
+                    return ((Comparable) o1).compareTo(o2);
+                } else {
+                    throw new RuntimeException("The object is not comparable");
+                }
             }
         };
     }
@@ -42,7 +46,9 @@ public class MyTreeSet implements Set {
 
     @Override
     public boolean contains(Object object) {
-        if(size == 0) {
+        if(object == null){
+            throw new NullPointerException("Null can't be an argument of method contains");
+        } else if (size == 0) {
             return false;
         }
         return find(object, root) != null;
@@ -105,6 +111,9 @@ public class MyTreeSet implements Set {
 
     @Override
     public boolean add(Object object) {
+        if(object == null){
+            throw new NullPointerException("Null can't be an argument of method add");
+        }
         Node newNode = new Node(object);
         boolean isAdded;
         if (root == null) {
@@ -113,7 +122,7 @@ public class MyTreeSet implements Set {
         } else {
             isAdded = add(object, root);
         }
-        if(isAdded) {
+        if (isAdded) {
             size++;
         }
         return isAdded;
@@ -121,8 +130,9 @@ public class MyTreeSet implements Set {
 
     @Override
     public boolean remove(Object object) {
-
-        if(find(object, root) == null){
+        if(object == null){
+            throw new NullPointerException("Null can't be an argument of method remove");
+        } else if (find(object, root) == null) {
             return false;
         }
 
@@ -143,12 +153,12 @@ public class MyTreeSet implements Set {
             if (node.left == null && node.right == null) {
                 return null;
             } else if (node.left == null) {
-                if(node.equals(root)){
+                if (node.equals(root)) {
                     root = node.right;
                 }
                 return node.right;
             } else if (node.right == null) {
-                if(node.equals(root)){
+                if (node.equals(root)) {
                     root = node.left;
                 }
                 return node.left;
@@ -164,7 +174,9 @@ public class MyTreeSet implements Set {
 
     @Override
     public boolean addAll(Collection collection) {
-        if (collection.size() == 0) return false;
+        if(collection == null){
+            throw new NullPointerException("Null can't be an argument of method addAll");
+        } else if (collection.size() == 0) return false;
         for (Object element : collection.toArray()) {
             add(element);
         }
@@ -179,7 +191,9 @@ public class MyTreeSet implements Set {
 
     @Override
     public boolean removeAll(Collection collection) {
-        if (collection.size() == 0) return false;
+        if(collection == null){
+            throw new NullPointerException("Null can't be an argument of method removeAll");
+        } else if (collection.size() == 0) return false;
         boolean isRemovedAll = true;
         for (Object element : collection.toArray()) {
             if (!remove(element)) {
@@ -192,7 +206,9 @@ public class MyTreeSet implements Set {
 
     @Override
     public boolean retainAll(Collection collection) {
-        if (collection.size() == 0) return false;
+        if(collection == null){
+            throw new NullPointerException("Null can't be an argument of method retainAll");
+        } else if (collection.size() == 0) return false;
         MyTreeSet retainedMyTreeSet = new MyTreeSet(comparator);
         for (Object element : collection.toArray()) {
             if (contains(element)) {
@@ -206,7 +222,9 @@ public class MyTreeSet implements Set {
 
     @Override
     public boolean containsAll(Collection collection) {
-        if (collection.size() == 0) return false;
+        if(collection == null){
+            throw new NullPointerException("Null can't be an argument of method containsAll");
+        } else if (collection.size() == 0) return false;
         for (Object element : collection.toArray()) {
             if (!contains(element)) return false;
         }
@@ -215,7 +233,9 @@ public class MyTreeSet implements Set {
 
     @Override
     public Object[] toArray(Object[] objects) {
-        if (objects.length < size) {
+        if(objects == null){
+            throw new NullPointerException("Null can't be an argument of method toArray");
+        } else if (objects.length < size) {
             return toArray();
         } else {
             Iterator iterator = this.iterator();

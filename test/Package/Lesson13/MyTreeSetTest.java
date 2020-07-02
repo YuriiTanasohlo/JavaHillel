@@ -9,9 +9,7 @@ import java.util.TreeSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyTreeSetTest {
-//    static MyTreeSet myTreeSet = new MyTreeSet(new IntComparator());
-    static MyTreeSet myTreeSet = new MyTreeSet();
-
+    static MyTreeSet myTreeSet = new MyTreeSet(new IntComparator());
     @BeforeAll
     static void fillTree() {
         myTreeSet.add(1);
@@ -20,6 +18,17 @@ class MyTreeSetTest {
         myTreeSet.add(3);
         myTreeSet.add(2);
         myTreeSet.add(5);
+    }
+
+
+
+    @Test
+    void comparator(){
+        MyTreeSet myTreeSetWithoutComparator = new MyTreeSet();
+        class TestClass {}
+        myTreeSetWithoutComparator.add(new TestClass());
+        Exception exception = assertThrows(RuntimeException.class, () -> myTreeSetWithoutComparator.add(new TestClass()));
+        assertEquals("The object is not comparable", exception.getMessage());
     }
 
     @Test
@@ -39,6 +48,8 @@ class MyTreeSetTest {
     void contains() {
         assertTrue(myTreeSet.contains(5));
         assertFalse(myTreeSet.contains(6));
+        Exception exception = assertThrows(NullPointerException.class, () -> myTreeSet.contains(null));
+        assertEquals("Null can't be an argument of method contains", exception.getMessage());
     }
 
     @Test
@@ -72,6 +83,8 @@ class MyTreeSetTest {
         assertFalse(myTreeSetForAdd.contains(1));
         myTreeSetForAdd.add(1);
         assertTrue(myTreeSetForAdd.contains(1));
+        Exception exception = assertThrows(NullPointerException.class, () -> myTreeSetForAdd.add(null));
+        assertEquals("Null can't be an argument of method add", exception.getMessage());
     }
 
     @Test
@@ -81,6 +94,8 @@ class MyTreeSetTest {
         assertTrue(myTreeSetForRemove.contains(1));
         myTreeSetForRemove.remove(1);
         assertFalse(myTreeSetForRemove.contains(1));
+        Exception exception = assertThrows(NullPointerException.class, () -> myTreeSetForRemove.remove(null));
+        assertEquals("Null can't be an argument of method remove", exception.getMessage());
     }
 
     @Test
@@ -91,8 +106,9 @@ class MyTreeSetTest {
         TreeSet treeSetToAddAll = fillMyTreeSet(10, 40, myTreeSetToAddAll);
         myTreeSet.addAll(myTreeSetToAddAll);
         treeSet.addAll(treeSetToAddAll);
-
         assertEquals(treeSet.toString(), myTreeSet.toString());
+        Exception exception = assertThrows(NullPointerException.class, () -> myTreeSet.addAll(null));
+        assertEquals("Null can't be an argument of method addAll", exception.getMessage());
     }
 
     @Test
@@ -119,6 +135,8 @@ class MyTreeSetTest {
         myTreeSet.removeAll(myTreeSetToRemoveAll);
         treeSet.removeAll(treeSetToRemoveAll);
         assertEquals(treeSet.toString(), myTreeSet.toString());
+        Exception exception = assertThrows(NullPointerException.class, () -> myTreeSet.removeAll(null));
+        assertEquals("Null can't be an argument of method removeAll", exception.getMessage());
     }
 
     @Test
@@ -196,6 +214,9 @@ class MyTreeSetTest {
         myTreeSet.retainAll(myTreeSetToRetainAll);
         treeSet.retainAll(treeSetToRemoveAll);
         assertEquals(treeSet.toString(), myTreeSet.toString());
+
+        Exception exception = assertThrows(NullPointerException.class, () -> myTreeSet.retainAll(null));
+        assertEquals("Null can't be an argument of method retainAll", exception.getMessage());
     }
 
     @Test
@@ -207,6 +228,8 @@ class MyTreeSetTest {
         assertTrue(myTreeSet.containsAll(myTreeSetForContainsAll));
         myTreeSetForContainsAll.add(7);
         assertFalse(myTreeSet.containsAll(myTreeSetForContainsAll));
+        Exception exception = assertThrows(NullPointerException.class, () -> myTreeSet.containsAll(null));
+        assertEquals("Null can't be an argument of method containsAll", exception.getMessage());
     }
 
     @Test
