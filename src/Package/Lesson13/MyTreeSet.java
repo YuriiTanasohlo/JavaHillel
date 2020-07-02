@@ -8,6 +8,18 @@ public class MyTreeSet implements Set {
     private Node root;
     private Comparator comparator;
 
+    public MyTreeSet() {
+        root = null;
+        size = 0;
+        this.comparator = new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                return ((Comparable) o1).compareTo(o2);
+            }
+        };
+
+    }
+
     public MyTreeSet(Comparator comparator) {
         root = null;
         size = 0;

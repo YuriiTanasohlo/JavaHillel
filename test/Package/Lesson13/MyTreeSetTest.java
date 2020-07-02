@@ -9,7 +9,8 @@ import java.util.TreeSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyTreeSetTest {
-    static MyTreeSet myTreeSet = new MyTreeSet(new IntComparator());
+//    static MyTreeSet myTreeSet = new MyTreeSet(new IntComparator());
+    static MyTreeSet myTreeSet = new MyTreeSet();
 
     @BeforeAll
     static void fillTree() {
