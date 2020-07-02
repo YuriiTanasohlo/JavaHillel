@@ -17,7 +17,10 @@ public class MyTreeSet implements Set {
                 return ((Comparable) o1).compareTo(o2);
             }
         };
+    }
 
+    public void setComparator(Comparator comparator) {
+        this.comparator = comparator;
     }
 
     public MyTreeSet(Comparator comparator) {
