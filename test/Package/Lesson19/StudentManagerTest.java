@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StudentManagerTest {
 
-    private static int countOfStudents = 10000;
+    private static int countOfStudents = 1000000;
 
     @Test
     void readStudentsFromHDDByGSON() throws IOException, ClassNotFoundException {
@@ -26,7 +26,7 @@ class StudentManagerTest {
         long startTime = System.currentTimeMillis();
         studentManager.readStudentsFromHDDByGSON();
         long endTime = System.currentTimeMillis();
-        System.out.println("Time for writeStudentsToHDDByGSON: " + (endTime - startTime) + " ms for " + countOfStudents + " students");
+        System.out.println("Time for readStudentsFromHDDByGSON: " + (endTime - startTime) + " ms for " + countOfStudents + " students");
 
         assertEquals(student.getName(), studentManager.getStudentByName("Ivanov").getName());
         assertEquals(student.getAge(), studentManager.getStudentByName("Ivanov").getAge());
@@ -49,7 +49,7 @@ class StudentManagerTest {
         long startTime = System.currentTimeMillis();
         studentManager.readStudentsFromHDDBySerialisation();
         long endTime = System.currentTimeMillis();
-        System.out.println("Time for writeStudentsToHDDByGSON: " + (endTime - startTime) + " ms for " + countOfStudents + " students");
+        System.out.println("Time for readStudentsFromHDDBySerialisation: " + (endTime - startTime) + " ms for " + countOfStudents + " students");
 
         assertEquals(student.getName(), studentManager.getStudentByName("Ivanov").getName());
         assertEquals(student.getAge(), studentManager.getStudentByName("Ivanov").getAge());
