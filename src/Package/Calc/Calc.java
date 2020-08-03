@@ -38,7 +38,7 @@ public class Calc {
         }
     }
 
-    private static String formatExpression(String expression){
+    private static String formatExpression(String expression) {
 //        (^-)?\\d+\\.?\\d* -  negative number on the beginning of the string, or just numbers on any position of the string (numbers can be floating point number)
 //        |\\(\\-\\d+\\.?\\d* - or negative numbers after opened bracket
 //        |\\*|\\/|\\+|\\-|\\(|\\)|\\^ - or different operands
@@ -46,15 +46,14 @@ public class Calc {
         Matcher m = p.matcher(expression);
         String formattedExpression = "";
         while (m.find()) {
-            if(m.group().length() > 1){
+            if (m.group().length() > 1) {
 //                to add zero to negative operands like: -5-(-5) -> 0-5-(0-5)
-                if(m.group().charAt(0) == '-'){
+                if (m.group().charAt(0) == '-') {
                     formattedExpression += ('0' + m.group());
-                } else if(m.group().charAt(0) == '(' && m.group().charAt(1) == '-'){
+                } else if (m.group().charAt(0) == '(' && m.group().charAt(1) == '-') {
                     formattedExpression += ("(0" + m.group().substring(1));
                 }
-            }
-             else {
+            } else {
                 formattedExpression += m.group();
             }
         }
@@ -151,13 +150,28 @@ public class Calc {
     }
 
     private static int getPriority(char token) {
-        return switch (token) {
-            case '^' -> 4;
-            case '*', '/' -> 3;
-            case '+', '-' -> 2;
-            case '(' -> 1;
-            case ')' -> -1;
-            default -> 0;
-        };
+        int i;
+        switch (token) {
+            case '^':
+                i = 4;
+                break;
+            case '*':
+            case '/':
+                i = 3;
+                break;
+            case '+':
+            case '-':
+                i = 2;
+                break;
+            case '(':
+                i = 1;
+                break;
+            case ')':
+                i = -1;
+                break;
+            default:
+                i = 0;
+        }
+        return i;
     }
 }
