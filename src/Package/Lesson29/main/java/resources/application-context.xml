@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <bean id="taskRepository" class="Package.Lesson29.main.java.com.tanasohlo.repository.TaskRepositoryImpl">
+    </bean>
+
+    <bean id="employeeRepository" class="Package.Lesson29.main.java.com.tanasohlo.repository.EmployeeRepositoryImpl">
+    </bean>
+
+    <bean id="idGenerator" class="Package.Lesson29.main.java.com.tanasohlo.service.IDGeneratorImpl">
+    </bean>
+
+    <bean id="employeeService" class="Package.Lesson29.main.java.com.tanasohlo.service.EmployeeServiceImpl">
+        <constructor-arg name="employeeRepository" ref="employeeRepository"/>
+        <constructor-arg name="idGenerator" ref="idGenerator"/>
+    </bean>
+
+    <bean id="taskService" class="Package.Lesson29.main.java.com.tanasohlo.service.TaskServiceImpl">
+        <constructor-arg name="taskRepository" ref="taskRepository"/>
+        <constructor-arg name="idGenerator" ref="idGenerator"/>
+    </bean>
+
+    <bean id="assignTaskService" class="Package.Lesson29.main.java.com.tanasohlo.service.AssignTaskServiceImpl">
+    </bean>
+
+</beans>
