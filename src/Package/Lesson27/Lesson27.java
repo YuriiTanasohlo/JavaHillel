@@ -16,8 +16,10 @@ public class Lesson27 {
         studentsList.add(new Student("Petrosianov"));
 
 
-        stream.getSortedListOfNameOfStudentsList(studentsList);
-
+        List<String> names = stream.getSortedListOfNameOfStudentsList(studentsList);
+        for (String name : names) {
+            System.out.println(name);
+        }
 
     }
 }

@@ -24,14 +24,4 @@ public class Stream {
                 }
         ).map(Student::getName).map(String::toUpperCase).collect(Collectors.toList());
     }
-
-    private int vowelCounter(String name){
-        Pattern pattern = Pattern.compile("[aeiou]");
-        Matcher matcher = pattern.matcher(name);
-        int count = 0;
-        while (matcher.find()) {
-            count++;
-        }
-        return count;
-    }
 }
