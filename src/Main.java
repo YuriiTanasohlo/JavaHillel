@@ -1,5 +1,3 @@
-import Package.Lesson27.Lesson27;
-
 public class Main {
     public static void main(String[] args) {
 //        Calc calc = new Calc();
@@ -29,6 +27,5 @@ public class Main {
 //        Lesson11.run();
 //        Lesson12.run();
 //        Lesson13.run();
-        Lesson27.run();
     }
 }
