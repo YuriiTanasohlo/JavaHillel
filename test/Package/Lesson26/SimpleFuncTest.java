@@ -7,6 +7,7 @@ import java.util.List;
 
 import static jdk.nashorn.internal.objects.NativeMath.round;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SimpleFuncTest {
 
@@ -24,6 +25,9 @@ class SimpleFuncTest {
             expectedResult += randomDouble;
         }
         expectedResult /= iterations;
+
+        List<Double> emptyList = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> SimpleFunc.mean(emptyList));
 
         assertEquals(round(SimpleFunc.mean(numbers), 4), round(expectedResult, 4));
     }

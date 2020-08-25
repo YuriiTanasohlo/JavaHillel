@@ -5,6 +5,11 @@ import java.util.List;
 
 public class SimpleFunc {
     static public Double mean(List<Double> numbers) {
+
+        if(numbers.size() == 0){
+            throw new IllegalArgumentException("List shouldn't be empty");
+        }
+
         BigDecimal sum = BigDecimal.valueOf(0);
         for (Double number : numbers) {
             sum = sum.add(BigDecimal.valueOf(number));
