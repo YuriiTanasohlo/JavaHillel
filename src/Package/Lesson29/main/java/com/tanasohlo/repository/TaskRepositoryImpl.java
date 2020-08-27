@@ -1,12 +1,14 @@
 package Package.Lesson29.main.java.com.tanasohlo.repository;
 
 import Package.Lesson29.main.java.com.tanasohlo.model.Task;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class TaskRepositoryImpl implements TaskRepository{
     private Map<String, Task> taskByID = new HashMap<>();
 

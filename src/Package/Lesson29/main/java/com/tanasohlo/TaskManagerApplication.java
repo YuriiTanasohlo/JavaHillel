@@ -6,18 +6,18 @@ import Package.Lesson29.main.java.com.tanasohlo.service.AssignTaskService;
 import Package.Lesson29.main.java.com.tanasohlo.service.EmployeeService;
 import Package.Lesson29.main.java.com.tanasohlo.service.TaskService;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class TaskManagerApplication {
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
+		ApplicationContext applicationContext = new AnnotationConfigApplicationContext("Package.Lesson29.main");
 
-		TaskService taskService = applicationContext.getBean("taskService", TaskService.class);
-		EmployeeService employeeService = applicationContext.getBean("employeeService", EmployeeService.class);
-		AssignTaskService assignTaskService = applicationContext.getBean("assignTaskService", AssignTaskService.class);
+		TaskService taskService = applicationContext.getBean(TaskService.class);
+		EmployeeService employeeService = applicationContext.getBean(EmployeeService.class);
+		AssignTaskService assignTaskService = applicationContext.getBean(AssignTaskService.class);
 
 
 
@@ -39,6 +39,8 @@ public class TaskManagerApplication {
 			System.out.println("Task " + currentTask.getName() + " with price " + currentTask.getPrice() + " is assigned to " + currentTask.getAssignee().getName());
 		}
 	}
+
+
 
 
 
